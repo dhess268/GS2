@@ -40,7 +40,9 @@ io.on('connection', (socket) => {
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(bodyParser.json())
     
-    
+    app.get('/', (req, res) => {
+        res.sendFile(response.sendFile(__dirname + '/index.html'))
+    })
 
     db.collection('counts').find().toArray()
     .then(result => {
@@ -100,10 +102,6 @@ function getCount() {
 }
 
 
-server.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`)
+server.listen(process.env.PORT || PORT, () => {
+    console.log(`Server running on port ${PORT}`)
 })
-
-function getCount(){
-    
-}
