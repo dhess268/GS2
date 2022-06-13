@@ -2,5 +2,19 @@ button {
     font-size: 50px;
 }
 h2 {
-    font-size: 50px;
+    font-size: 100px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 75px;
+    text-align: center;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgb(242, 246, 252);
 }
