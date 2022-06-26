@@ -24,7 +24,7 @@ function dealWithFGers() {
 
 function dealWithLGers(event) {
     socket.emit('lGerson')
-    play("Sound/luvger.mp3")
+    play("sound/luvger.mp3")
     let count = Number(h2.innerText)
     count -= 1
     h2.innerText = count
