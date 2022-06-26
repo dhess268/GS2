@@ -4,14 +4,31 @@ const audioSection = document.querySelector('#audioSection')
 const button = document.querySelector('#fGersButton')
 const h2 = document.querySelector('#counter')
 button.addEventListener('click', dealWithFGers)
+const loveButton = document.querySelector('#loveGersButton')
+loveButton.addEventListener('click', dealWithLGers)
+const but = document.querySelector('.btn')
+
+// but.addEventListener('focusin', (event) => {
+//     event.target.blur()
+//   });
 
 
 function dealWithFGers() {
     socket.emit('fGerson')
-    play()
+    play("sound/effgerson.mp3")
     let count = Number(h2.innerText)
     count += 1
     h2.innerText = count
+    event.target.blur()
+}
+
+function dealWithLGers(event) {
+    socket.emit('lGerson')
+    play("Sound/luvger.mp3")
+    let count = Number(h2.innerText)
+    count -= 1
+    h2.innerText = count
+    event.target.blur()
 }
 
 
@@ -28,9 +45,9 @@ socket.on('fGers', () => {
 })
 
 
-function play() {
+function play(path) {
     let aud = document.createElement('audio')
-    aud.src = "sound/effgerson.mp3"
+    aud.src = path
     audioSection.appendChild(aud)
     aud.play()
     // var audio = document.getElementById("audio");

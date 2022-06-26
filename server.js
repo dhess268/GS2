@@ -69,6 +69,24 @@ io.on('connection', (socket) => {
                 .catch(error => console.error(error))   
     })
 
+
+    socket.on('lGerson', () => {
+        db.collection('counts').findOneAndUpdate(
+            {},
+            {
+              $inc: {
+                counter: -1
+              }
+            },
+            {
+              upsert: true
+            }
+        )
+        .then(result => {
+            socket.broadcast.emit('fGers')})
+        .catch(error => console.error(error))   
+    })
+
     // app.post('/fgers', (req, res) => {
     //     console.log(req.body)
     //     db.collection('counts').insertOne(req.body)
