@@ -7,11 +7,20 @@ button.addEventListener('click', dealWithFGers)
 const loveButton = document.querySelector('#loveGersButton')
 loveButton.addEventListener('click', dealWithLGers)
 const but = document.querySelector('.btn')
-
+var form = document.getElementById('form');
 // but.addEventListener('focusin', (event) => {
 //     event.target.blur()
 //   });
 
+var input = document.getElementById('input');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (input.value) {
+    //   socket.emit('chat message', input.value);
+      input.value = '';
+    }
+  });
 
 function dealWithFGers() {
     socket.emit('fGerson')

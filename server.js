@@ -23,6 +23,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 const setCount = 0
 
+const {userJoin, getCurrentUser, userLeave, getUsers} = require('./utils/users')
+const botName = 'bot'
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 let db,
     dbConnectionStr = process.env.DB_STRING,
@@ -96,7 +100,24 @@ io.on('connection', (socket) => {
     //       .catch(error => console.error(error))
     //   })
 
+    socket.on('joinRoom', () => {
 
+        const user = userJoin(socket.id, username, room, color)
+        // console.log(getCurrentUser(socket.id))
+    
+          // Welcome message for current user only
+        socket.emit('connected', formatMessage(botName, 'Welcome to the chat')) 
+    
+        // Sends to everyone but the current user
+        socket.broadcast.emit('connected', formatMessage(botName, `<span style= 'color:${user.color};'>`+user.username+'</span>'+ " has connected to the chat"))
+    
+        
+        // on chat message send out message to all users
+        socket.on('chat message', (msg) => {
+          const user = getCurrentUser(socket.id)
+          io.emit('chat message', formatMessage(user.username, msg, user.color));
+        })
+    })
 
 
 
